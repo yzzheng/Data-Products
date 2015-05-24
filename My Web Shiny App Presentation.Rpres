@@ -1,10 +1,26 @@
-A web application for estimating diamond price
+My web app for estimating diamond price
 ====================================================
 author: YZZheng
-date: April 27, 2015
+date: May 24, 2015
 
 ====================================================
+Sometimes we need to predict the price from the diamond weight. From the data sets, there is a clear linear relationship between the diamond weight and price.
+```{r, echo=FALSE}
+library(UsingR)
+plot(diamond$carat, diamond$price)
+abline(lm(price ~ carat, data=diamond), col="red", lwd=3)
+```
 
+====================================================
+So, we can use linear regression model to predict the price from the weight, such as:
+
+```{r}
+mode1 <- lm(price~carat, data=diamond)
+pred1 <- predict(mode1, data.frame(carat=0.275))
+pred1
+```
+
+==================================================
 ### Requirements:
 
 - library(shiny)
@@ -14,8 +30,7 @@ date: April 27, 2015
 - setwd("The directory and the subdirectory called "cp")
 - Run the code: runApp("cp"), the interactive web app will - show up in the local window or externally on web browser
 
-=====================================================
-
+====================================================
 ```{r}
 library(shiny)
 library(UsingR)
@@ -23,18 +38,4 @@ data(diamond)
 summary(diamond)
 ```
 
-=================================================
-
-```{r}
-plot(diamond$carat, diamond$price)
-abline(lm(price ~ carat, data=diamond), col="red", lwd=3)
-```
-
-=================================================
-So, there is clear linear relationship between the diamond weight and price. We can use linear regression model to predict the price from the weight, such as:
-
-```{r}
-mode1 <- lm(price~carat, data=diamond)
-pred1 <- predict(mode1, data.frame(carat=0.275))
-pred1
-```
+====================================================
